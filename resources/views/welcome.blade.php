@@ -61,7 +61,6 @@
   </head>
   <body>
   
-  <a href="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyBuhdse5XZbloZe92_8pSzFLheUY20__Yo">get</a>
 
   <form role="form" method="post">
    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -69,7 +68,7 @@
 
     <input id="destination-input" class="controls" type="text" placeholder="Enter a destination location" name="to">
 
-    <div id="mode-selector" class="controls">
+    <!-- <div id="mode-selector" class="controls">
       <input type="radio" name="type" id="changemode-walking">
       <label for="changemode-walking">Walking</label>
 
@@ -79,8 +78,8 @@
       <input type="radio" name="type" id="changemode-driving" checked="checked">
       <label for="changemode-driving">Driving</label>
 
-    </div>
-<button type="submit" class="btn btn-primary">Login</button>
+    </div> -->
+<button type="submit" class="btn btn-primary">Get Rate</button>
     </form>
 
     <div id="map"></div>
@@ -107,10 +106,10 @@
         this.map = map;
         this.originPlaceId = null;
         this.destinationPlaceId = null;
-        this.travelMode = 'WALKING';
+        this.travelMode = 'DRIVING';
         var originInput = document.getElementById('origin-input');
         var destinationInput = document.getElementById('destination-input');
-        var modeSelector = document.getElementById('mode-selector');
+        var modeSelector = 'changemode-driving';
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
         this.directionsDisplay.setMap(map);
@@ -120,8 +119,8 @@
         var destinationAutocomplete = new google.maps.places.Autocomplete(
             destinationInput, {placeIdOnly: true});
 
-        this.setupClickListener('changemode-walking', 'WALKING');
-        this.setupClickListener('changemode-transit', 'TRANSIT');
+        // this.setupClickListener('changemode-walking', 'WALKING');
+        // this.setupClickListener('changemode-transit', 'TRANSIT');
         this.setupClickListener('changemode-driving', 'DRIVING');
 
         this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
